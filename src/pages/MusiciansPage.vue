@@ -7,9 +7,9 @@
                 $store.state.data.musicians
             )"
             :key="index"
-            @click="showSongs(musician)"
+            @click="openSongsModal(musician)"
         >
-            <q-item-section avatar>
+            <q-item-section avatar style="min-width: 40px">
                 <q-icon name="mic_external_on" />
             </q-item-section>
             <q-item-section>{{ musician }}</q-item-section>
@@ -36,7 +36,7 @@
                         :key="index"
                         @click="icon = true"
                     >
-                        <q-item-section avatar>
+                        <q-item-section avatar style="min-width: 40px">
                             <q-icon name="audiotrack" />
                         </q-item-section>
                         <q-item-section>{{ musician.song }}</q-item-section>
@@ -60,7 +60,7 @@ export default {
     },
 
     methods: {
-        showSongs(musician) {
+        openSongsModal(musician) {
             this.currentMusician = musician;
             this.modal = true;
         },

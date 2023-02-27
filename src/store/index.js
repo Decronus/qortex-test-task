@@ -78,7 +78,7 @@ export default createStore({
                         year: 2014,
                     },
                 ],
-                "The Agonist": [
+                "The agonist": [
                     {
                         song: "Dance Macabre",
                         year: 2016,
@@ -100,7 +100,7 @@ export default createStore({
                         year: 2016,
                     },
                 ],
-                "Dream Theater": [
+                "Dream theater": [
                     {
                         song: "Dark Eternal Night",
                         year: 2007,
@@ -126,7 +126,7 @@ export default createStore({
                         year: 2012,
                     },
                 ],
-                "Lamb of God": [
+                "Lamb of god": [
                     {
                         song: "Broken Hands",
                         year: 2004,
@@ -143,16 +143,46 @@ export default createStore({
             },
 
             albums: {
-                "Топ треков": ["Metallica - Master of puppets"],
-                2022: ["Metallica - Master of puppets"],
-                Новое: ["Metallica - Master of puppets"],
-                "Для тренировок": ["Metallica - Master of puppets"],
-                Классика: ["Metallica - Master of puppets"],
+                "Топ треков": [
+                    { song: "Dream theater - Forsaken", year: 1994 },
+                ],
+                2022: [{ song: "Jinjer - I speak astronomy", year: 2017 }],
+                Новое: [{ song: "Metallica - Master of puppets", year: 1989 }],
+                "Для тренировок": [
+                    { song: "The agonist - Dance Macabre", year: 2016 },
+                ],
+                Классика: [{ song: "Lamb of god - Broken Hands", year: 2004 }],
             },
         },
     },
     getters: {},
-    mutations: {},
+    mutations: {
+        addSong(state, payload) {
+            const { musician, songName, songYear, album } = payload;
+
+            const arr = [];
+            for (let el in state.data.musicians[musician]) {
+                arr.push(el.song);
+            }
+
+            const songToMusiciansList = {
+                song: `${songName}`,
+                year: songYear,
+            };
+            const songToAlbum = {
+                song: `${musician} - ${songName}`,
+                year: songYear,
+            };
+
+            if (Object.keys(state.data.musicians).includes(musician)) {
+                if (!arr.includes(songName)) {
+                    state.data.musicians[musician].push(songToMusiciansList);
+                }
+            }
+
+            state.data.albums[album].push(songToAlbum);
+        },
+    },
     actions: {},
     modules: {},
 });
