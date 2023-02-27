@@ -1,30 +1,27 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <q-layout>
+        <q-header bordered class="bg-white text-primary">
+            <q-tabs no-caps>
+                <q-route-tab name="main" label="Главная" to="/" />
+                <q-route-tab
+                    name="musicians"
+                    label="Исполнители"
+                    to="/musicians"
+                />
+                <q-route-tab name="albums" label="Альбомы" to="/albums" />
+            </q-tabs>
+        </q-header>
+
+        <q-page-container>
+            <q-page padding>
+                <router-view></router-view>
+            </q-page>
+        </q-page-container>
+    </q-layout>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+export default {
+    name: "LayoutDefault",
+};
+</script>
