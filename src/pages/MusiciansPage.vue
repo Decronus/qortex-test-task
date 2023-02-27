@@ -10,7 +10,7 @@
             @click="showSongs(musician)"
         >
             <q-item-section avatar>
-                <q-icon name="audiotrack" />
+                <q-icon name="mic_external_on" />
             </q-item-section>
             <q-item-section>{{ musician }}</q-item-section>
             <q-item-section avatar>
@@ -19,11 +19,11 @@
         </q-item>
     </q-list>
 
-    <q-dialog v-model="icon">
+    <q-dialog v-model="modal">
         <q-layout style="min-height: 0%">
-            <q-card>
+            <q-card class="q-pa-md">
                 <q-card-section class="row items-center">
-                    <div class="text-h6">Песни {{ currentMusician }}</div>
+                    <div class="text-h6">{{ currentMusician }}</div>
                     <q-space />
                     <q-btn icon="close" flat round dense v-close-popup />
                 </q-card-section>
@@ -39,7 +39,10 @@
                         <q-item-section avatar>
                             <q-icon name="audiotrack" />
                         </q-item-section>
-                        <q-item-section>{{ musician }}</q-item-section>
+                        <q-item-section>{{ musician.song }}</q-item-section>
+                        <q-item-section class="text-grey-6">{{
+                            musician.year
+                        }}</q-item-section>
                     </q-item>
                 </q-list>
             </q-card>
@@ -51,7 +54,7 @@
 export default {
     data() {
         return {
-            icon: false,
+            modal: false,
             currentMusician: null,
         };
     },
@@ -59,7 +62,7 @@ export default {
     methods: {
         showSongs(musician) {
             this.currentMusician = musician;
-            this.icon = true;
+            this.modal = true;
         },
     },
 };
