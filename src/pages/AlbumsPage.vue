@@ -142,6 +142,13 @@ export default {
         addSong() {
             this.validateInputs();
 
+            const arrSongs = [];
+            for (let el in this.$store.state.data.albums[this.currentAlbum]) {
+                arrSongs.push(
+                    this.$store.state.data.albums[this.currentAlbum][el].song
+                );
+            }
+
             if (this.musician && this.songName && this.songYear) {
                 const payload = {
                     musician: this.formatString(this.musician),
@@ -151,9 +158,9 @@ export default {
                 };
 
                 if (
-                    JSON.stringify(
-                        this.$store.state.data.albums[this.currentAlbum]
-                    ).includes(`${payload.musician} - ${payload.songName}`)
+                    arrSongs.includes(
+                        `${payload.musician} - ${payload.songName}`
+                    )
                 ) {
                     this.$q.notify({
                         type: "negative",
