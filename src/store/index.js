@@ -158,29 +158,31 @@ export default createStore({
     getters: {},
     mutations: {
         addSong(state, payload) {
-            const { musician, songName, songYear, album } = payload;
-
-            const arr = [];
-            for (let el in state.data.musicians[musician]) {
-                arr.push(el.song);
+            const arrSongs = [];
+            for (let el in state.data.musicians[payload.musician]) {
+                arrSongs.push(state.data.musicians[payload.musician][el].song);
             }
 
             const songToMusiciansList = {
-                song: `${songName}`,
-                year: songYear,
+                song: `${payload.songName}`,
+                year: payload.songYear,
             };
             const songToAlbum = {
-                song: `${musician} - ${songName}`,
-                year: songYear,
+                song: `${payload.musician} - ${payload.songName}`,
+                year: payload.songYear,
             };
 
-            if (Object.keys(state.data.musicians).includes(musician)) {
-                if (!arr.includes(songName)) {
-                    state.data.musicians[musician].push(songToMusiciansList);
+            if (Object.keys(state.data.musicians).includes(payload.musician)) {
+                if (!arrSongs.includes(payload.songName)) {
+                    state.data.musicians[payload.musician].push(
+                        songToMusiciansList
+                    );
                 }
+            } else {
+                state.data.musicians[payload.musician] = [songToMusiciansList];
             }
 
-            state.data.albums[album].push(songToAlbum);
+            state.data.albums[payload.album].push(songToAlbum);
         },
     },
     actions: {},
